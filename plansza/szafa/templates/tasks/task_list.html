@@ -16,10 +16,16 @@
         | projekt: {{ task.project }}
         | termin: {{ task.due_date }}
     </li>
+    <p>
+    <a href="{% url 'task_delete' pk=task.id %}">Usuń</a>
+</p>
     {% endfor %}
 </ul>
 {% else %}
 <p>Brak zadań.</p>
 {% endif %}
+<p>
+    <a href="{% url 'task_add'%}">Nowe zadanie</a>
+</p>
 </body>
 </html>
