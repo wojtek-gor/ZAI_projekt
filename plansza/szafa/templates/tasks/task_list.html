@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista zadań</title>
-</head>
-<body>
-<h1>Lista zadań</h1>
-{% if tasks %}
-<ul>
-    {% for task in tasks %}
-    <li>
-        <a href="{% url 'task_detail' task.pk %}">
-            {{ task.title }}
-        </a>
-        | status: {{ task.status }}
-        | projekt: {{ task.project }}
-        | termin: {{ task.due_date }}
-    </li>
-    <p>
-    <a href="{% url 'task_delete' pk=task.id %}">Usuń</a>
-</p>
-    {% endfor %}
-</ul>
-{% else %}
-<p>Brak zadań.</p>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Lista zadań</h2>
+
 <p>
-    <a href="{% url 'task_add'%}">Nowe zadanie</a>
+    <a href="{% url 'task_add' %}" class="btn btn-outline-primary btn-sm">Dodaj zadanie</a>
 </p>
-</body>
-</html>
+
+{% if tasks %}
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{% url 'task_detail' task.pk %}" class="btn btn-outline-secondary btn-sm" style="width: 100ch;">
+                    {{ task.title }}
+                </a>
+                | status: {{ task.status }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Brak zadań.</p>
+{% endif %}
+
+{% endblock %}
